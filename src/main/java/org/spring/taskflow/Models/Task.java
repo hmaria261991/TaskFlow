@@ -19,6 +19,5 @@ public class Task {
     private Status status;
     private Priority priority;
     private String dueDate;
-    private User user;
-
+    private int user;
 }
