@@ -12,8 +12,8 @@ import java.util.Map;
 @RequestMapping("/api")
 public class UserController {
 
-    User user1 = new User(001, "Maria", "hmaria26@gmail.com");
-    User user2 = new User(002, "Maria", "hmaria26@gmail.com");
+    User user1 = new User(001L, "Maria", "hmaria26@gmail.com");
+    User user2 = new User(002L, "Maria", "hmaria26@gmail.com");
 
     @GetMapping("/detalle_user")
     public Map<String, Object> getUser(){
