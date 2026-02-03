@@ -19,19 +19,19 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User>  getlUser(Long id){
+    public Optional<User>  getUser(Long id){
         return userRepository.findById(id);
     }
 
     public void updateUser(User  user){
-        userRepository.save(user)
+        userRepository.save(user);
     }
 
     public void createUser(User  user){
         userRepository.save(user);
     }
 
-    public void deleteUserByID(Long id){
+    public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
 
