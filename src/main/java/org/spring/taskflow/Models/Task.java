@@ -15,10 +15,14 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false)
     private String title;
     private String description;
-    private Status status;
-    private Priority priority;
+    private Enum status;
+    private Enum priority;
     private String dueDate;
-    private int user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

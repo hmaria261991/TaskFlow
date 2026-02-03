@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class TaskController {
     User user1 =  new User(001, "Maria", "hmaria26@gmail.com");
-    Task task = new Task(001, "user CRUD", "Create CRUD of user instance", Status.PENDING, Priority.MEDIUM, "25 janv", 001);
+    Task task = new Task(001, "user CRUD", "Create CRUD of user instance", Status.PENDING, Priority.MEDIUM, "25 janv", user1);
 
 
     @GetMapping("/detalle_task")
