@@ -1,15 +1,17 @@
 package org.spring.taskflow.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+
 
 @Data
 @Entity
 @Table(name = "task")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Task {
 
     @Id
@@ -19,10 +21,10 @@ public class Task {
     @Column(nullable = false)
     private String title;
     private String description;
-    private Enum status;
-    private Enum priority;
+    private String status;
+    private String priority;
     private String dueDate;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid", nullable = false)
     private User user;
 }

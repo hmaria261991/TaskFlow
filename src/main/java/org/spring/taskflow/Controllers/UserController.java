@@ -1,26 +1,44 @@
 package org.spring.taskflow.Controllers;
 
 import org.spring.taskflow.Models.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.spring.taskflow.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 
-    User user1 = new User(001L, "Maria", "hmaria26@gmail.com");
-    User user2 = new User(002L, "Maria", "hmaria26@gmail.com");
+    @Autowired
+    private UserService userService;
 
-    @GetMapping("/detalle_user")
-    public Map<String, Object> getUser(){
-        Map<String, Object> response = new HashMap<>();
-        response.put("User", user2);
-        response.put("Information", user1);
-        return response;
+    @GetMapping()
+    public List<User> getUsers(){
+        return  userService.getAllUsers();
+    }
+
+
+    @GetMapping("/{userID}")
+    public Optional<User> getUserByID(@PathVariable("userID") Long userID){
+        return  userService.getUser(userID);
+    }
+
+//    @PostMapping()
+//    public void createUser(@RequestBody User user){
+//        userService.createUser(user);
+//    }
+
+    @PostMapping()
+    public void updateUser(@RequestBody User user){
+        userService.updateUser(user);
+    }
+
+
+    @DeleteMapping("/{userID}")
+    public void deleteUser(@PathVariable("userID") Long userID){
+        userService.deleteUser(userID);
     }
 
 }

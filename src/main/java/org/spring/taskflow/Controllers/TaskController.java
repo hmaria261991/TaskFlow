@@ -4,24 +4,44 @@ import org.spring.taskflow.Models.Priority;
 import org.spring.taskflow.Models.Status;
 import org.spring.taskflow.Models.Task;
 import org.spring.taskflow.Models.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.spring.taskflow.Service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
+
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/task")
 public class TaskController {
-    User user1 =  new User(001L, "Maria", "hmaria26@gmail.com");
-    Task task = new Task(001L, "user CRUD", "Create CRUD of user instance", Status.PENDING, Priority.MEDIUM, "25 janv", user1);
 
+    @Autowired
+    private TaskService taskService;
 
-    @GetMapping("/detalle_task")
-    public Map<String, Object> getTask(){
-        Map<String, Object> response = new HashMap<>();
-        response.put("Information", task);
-        return response;
+    @GetMapping()
+    public List<Task> getAllTasks(){
+        return taskService.getAllTasks();
     }
+
+    @GetMapping("{taskID}")
+    public Optional<Task> getTask(@PathVariable Long taskID){
+        return taskService.getTaskByID(taskID);
+    }
+
+//    @PostMapping()
+//    public void createTask(@RequestBody Task task){
+//        taskService.createTask(task);
+//    }
+
+    @PostMapping()
+    public void updateTask(@RequestBody Task task){
+        taskService.updateTask(task);
+    }
+
+    @DeleteMapping("/{taskID}")
+    public void deleteTask(@PathVariable("taskID") Long taskID){
+        taskService.deleteTask(taskID);
+    }
+
 }

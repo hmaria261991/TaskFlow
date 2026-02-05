@@ -2,6 +2,8 @@ package org.spring.taskflow.Models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,4 +19,5 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
 }
